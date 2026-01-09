@@ -1,0 +1,56 @@
+body {
+  margin: 0;
+  font-family: Arial;
+  background: #0f172a;
+  color: white;
+  text-align: center;
+  padding: 20px;
+}
+
+.hidden {
+  display: none;
+}
+
+button {
+  padding: 10px 20px;
+  margin: 8px;
+  border: none;
+  border-radius: 6px;
+  background: #22c55e;
+  color: black;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+input {
+  padding: 10px;
+  width: 200px;
+  text-align: center;
+}
+
+#storyText {
+  margin-top: 20px;
+  line-height: 2;
+}
+
+#storyText span.active {
+  background: yellow;
+  color: black;
+}
+
+#settings {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  cursor: pointer;
+  font-size: 22px;
+}
+
+#settingsBox {
+  position: fixed;
+  top: 50px;
+  left: 10px;
+  background: #020617;
+  padding: 15px;
+  border-radius: 10px;
+}
