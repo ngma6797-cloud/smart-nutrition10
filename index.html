@@ -1,104 +1,47 @@
 <!DOCTYPE html>
 <html lang="ar">
 <head>
-<meta charset="UTF-8">
-<title>قصص الأنبياء</title>
-<style>
-body {
-  font-family: Arial;
-  background: #111;
-  color: white;
-  text-align: center;
-  padding: 20px;
-}
-.hidden { displayিৱ none; }
-.story span.active {
-  background: yellow;
-  color: black;
-}
-button {
-  padding: 10px 20px;
-  margin: 5px;
-  cursor: pointer;
-}
-</style>
+  <meta charset="UTF-8">
+  <title>قصص الأنبياء</title>
+  <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
 <div id="login">
   <h2>مرحبًا بك</h2>
-  <button onclick="showName()">دخول</button>
+  <button id="enterBtn">دخول</button>
 </div>
 
 <div id="nameBox" class="hidden">
-  <input id="username" placeholder="اكتب اسمك">
-  <button onclick="welcome()">متابعة</button>
+  <input type="text" id="username" placeholder="اكتب اسمك">
+  <button id="nameBtn">متابعة</button>
 </div>
 
 <div id="menu" class="hidden">
   <h3>ما هي القصة التي تريدها؟</h3>
-  <button onclick="loadStory('isra')">الإسراء والمعراج</button>
-  <button onclick="loadStory('badr')">غزوة بدر</button>
+  <div id="storiesList"></div>
 </div>
 
 <div id="storyBox" class="hidden">
-  <div id="story" class="story"></div>
-  <button onclick="readStory()">🎤 اقرأ القصة</button>
+  <h3 id="storyTitle"></h3>
+  <div id="storyText"></div>
+  <button id="readBtn">🎤 اقرأ القصة</button>
 </div>
 
-<script>
-let voices = speechSynthesis.getVoices();
-let words = [];
-let index = 0;
+<div id="settings">
+  ⚙️
+</div>
 
-function showName(){
-  document.getElementById("login").style.display="none";
-  document.getElementById("nameBox").style.display="block";
-}
+<div id="settingsBox" class="hidden">
+  <label>لون النص</label>
+  <input type="color" id="textColor"><br>
 
-function welcome(){
-  let name = document.getElementById("username").value;
-  let msg = new SpeechSynthesisUtterance("أهلا وسهلا بك يا " + name);
-  msg.lang = "ar-SA";
-  speechSynthesis.speak(msg);
-  document.getElementById("nameBox").style.display="none";
-  document.getElementById("menu").style.display="block";
-}
+  <label>لون الخلفية</label>
+  <input type="color" id="bgColor"><br>
 
-function loadStory(type){
-  let text = "";
-  if(type==="isra"){
-    text = "رحلة الإسراء والمعراج كانت معجزة عظيمة أكرم الله بها نبيه محمد صلى الله عليه وسلم...";
-  } else {
-    text = "غزوة بدر كانت أول معركة فاصلة في الإسلام وحدثت في السنة الثانية للهجرة...";
-  }
+  <button onclick="closeSite()">إغلاق الموقع</button>
+</div>
 
-  words = text.split(" ");
-  let html = words.map(w=>`<span>${w}</span>`).join(" ");
-  document.getElementById("story").innerHTML = html;
-  document.getElementById("menu").style.display="none";
-  document.getElementById("storyBox").style.display="block";
-}
-
-function readStory(){
-  let spans = document.querySelectorAll("#story span");
-  index = 0;
-
-  let utter = new SpeechSynthesisUtterance(words.join(" "));
-  utter.lang = "ar-SA";
-
-  utter.onboundary = function(e){
-    if(e.name === "word"){
-      spans.forEach(s=>s.classList.remove("active"));
-      if(spans[index]) spans[index].classList.add("active");
-      index++;
-    }
-  };
-
-  speechSynthesis.speak(utter);
-}
-</script>
-
+<script src="script.js"></script>
 </body>
 </html>
